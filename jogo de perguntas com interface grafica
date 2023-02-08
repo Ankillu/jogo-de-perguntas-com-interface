@@ -1,0 +1,35 @@
+import tkinter as tk
+from tkinter import messagebox
+
+def check_answer(answer):
+    if answer == "3125":
+        second_question = tk.Toplevel(root)
+        second_question.geometry("200x200")
+        second_question.wm_title("Segunda pergunta")
+        second_label = tk.Label(second_question, text="Quanto é 4 elevado a 3?")
+        second_label.pack()
+        second_entry = tk.Entry(second_question)
+        second_entry.pack()
+        second_entry.focus_set()
+        second_button = tk.Button(second_question, text="Enviar", command=lambda: check_answer2(second_entry.get()))
+        second_button.pack()
+    else:
+        messagebox.showerror("Erro", "Você errou")
+
+def check_answer2(answer):
+    if answer == "64":
+        messagebox.showinfo("Sucesso", "Você acertou todas as perguntas!")
+    else:
+        messagebox.showerror("Erro", "Você errou")
+
+root = tk.Tk()
+root.geometry("200x200")
+root.wm_title("Primeira pergunta")
+label = tk.Label(root, text="Quanto é 5 elevado a 5?")
+label.pack()
+entry = tk.Entry(root)
+entry.pack()
+entry.focus_set()
+button = tk.Button(root, text="Enviar", command=lambda: check_answer(entry.get()))
+button.pack()
+root.mainloop()
